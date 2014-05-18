@@ -24,15 +24,25 @@ GameState.prototype.create = function() {
   // Set the pivot point of the light to the center of the texture
   this.light.anchor.setTo(0.5, 0.5);*/
 
-  // Add a second light and move it back and forth forever
-  var light = this.game.add.sprite(50, this.game.height - 50, 'light');
-  light.anchor.setTo(0.5, 0.5);
-  light.alpha = 0;
-  this.game.add.tween(light).to({
+  // Add a first light and move it back and forth forever
+  var lightOne = this.game.add.sprite(50, this.game.height - 50, 'light');
+  lightOne.anchor.setTo(0.5, 0.5);
+  lightOne.alpha = 0;
+  this.game.add.tween(lightOne).to({
       x: this.game.width - 80
     }, 10000,
     Phaser.Easing.Sinusoidal.InOut, true, 0, Number.POSITIVE_INFINITY, true);
-  this.lightGroup.add(light);
+  this.lightGroup.add(lightOne);
+
+  //Add a second light and move it up and down forever
+  var lightTwo = this.game.add.sprite(this.game.width - 50, this.game.height - 80, 'light');
+  lightTwo.anchor.setTo(0.5, 0.5);
+  lightTwo.alpha = 0;
+  this.game.add.tween(lightTwo).to({
+      x: 80
+    }, 10000,
+    Phaser.Easing.Sinusoidal.inOut, true, 0, Number.POSITIVE_INFINITY, true);
+  this.lightGroup.add(lightTwo);
 
   // Create a bitmap texture for drawing light cones
   this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
@@ -58,7 +68,7 @@ GameState.prototype.create = function() {
   this.game.input.onTap.add(this.toggleRays, this);
 
   // Build some walls. These will block line of sight.
-  var NUMBER_OF_WALLS = 5;
+  var NUMBER_OF_WALLS = 6;
   this.walls = this.game.add.group();
   var i, x, y;
   for (i = 0; i < NUMBER_OF_WALLS; i++) {

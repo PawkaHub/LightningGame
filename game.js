@@ -18,15 +18,16 @@ GameState.prototype.create = function() {
 
   // Add the light
   this.lightGroup = this.game.add.group();
-  this.light = this.game.add.sprite(this.game.width / 2, this.game.height / 2, 'light');
+  /*this.light = this.game.add.sprite(this.game.width / 2, this.game.height / 2, 'light');
   this.lightGroup.add(this.light);
 
   // Set the pivot point of the light to the center of the texture
-  this.light.anchor.setTo(0.5, 0.5);
+  this.light.anchor.setTo(0.5, 0.5);*/
 
   // Add a second light and move it back and forth forever
   var light = this.game.add.sprite(50, this.game.height - 50, 'light');
   light.anchor.setTo(0.5, 0.5);
+  light.alpha = 0;
   this.game.add.tween(light).to({
       x: this.game.width - 80
     }, 10000,
@@ -36,7 +37,7 @@ GameState.prototype.create = function() {
   // Create a bitmap texture for drawing light cones
   this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
   this.bitmap.context.fillStyle = 'rgb(255,255,255)';
-  this.bitmap.context.strokeStyle = 'rgb(255,255,255)';
+  //this.bitmap.context.strokeStyle = 'rgb(255,255,255)';
   var lightBitmap = this.game.add.image(0, 0, this.bitmap);
 
   // This bitmap is drawn onto the screen using the MULTIPLY blend mode.
@@ -57,7 +58,7 @@ GameState.prototype.create = function() {
   this.game.input.onTap.add(this.toggleRays, this);
 
   // Build some walls. These will block line of sight.
-  var NUMBER_OF_WALLS = 4;
+  var NUMBER_OF_WALLS = 5;
   this.walls = this.game.add.group();
   var i, x, y;
   for (i = 0; i < NUMBER_OF_WALLS; i++) {
@@ -97,10 +98,10 @@ GameState.prototype.update = function() {
   }
 
   // Move the light to the pointer/touch location
-  this.light.x = this.game.input.activePointer.x;
-  this.light.y = this.game.input.activePointer.y;
+  /*this.light.x = this.game.input.activePointer.x;
+  this.light.y = this.game.input.activePointer.y;*/
 
-  // Next, fill the entire light bitmap with a dark shadow color.
+  // Next, fill the entire light bitmap with a light shadow color.
   this.bitmap.context.fillStyle = 'rgb(255,255,255)';
   this.bitmap.context.fillRect(0, 0, this.game.width, this.game.height);
   this.rayBitmap.context.clearRect(0, 0, this.game.width, this.game.height);

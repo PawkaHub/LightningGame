@@ -7,8 +7,8 @@ var GameState = function(game) {};
 
 // Load images and sounds
 GameState.prototype.preload = function() {
-  this.game.load.image("block", "/assets/gfx/block.png");
-  this.game.load.image("light", "/assets/gfx/light.png");
+  this.game.load.image("block", "assets/gfx/block.png");
+  this.game.load.image("light", "assets/gfx/light.png");
 };
 
 // Setup the example
